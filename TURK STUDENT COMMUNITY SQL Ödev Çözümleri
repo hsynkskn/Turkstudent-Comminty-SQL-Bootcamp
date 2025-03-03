@@ -1,0 +1,185 @@
+TURK STUDENT COMMUNITY
+
+SQL BOOTCAMP BİRİNCİ HAFTA ÖDEV ÇÖZÜMLERİ
+
+-- Tablo oluşturma komutları
+
+- Departments tablosunun oluşturulması ve veri eklenmesi
+CREATE TABLE Departments (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName VARCHAR(50) NOT NULL
+);
+
+INSERT INTO Departments (DepartmentID, DepartmentName) VALUES
+(1, 'IT'),
+(2, 'HR'),
+(3, 'Finance');
+
+-- Employees tablosunun oluşturulması ve veri eklenmesi
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    Age INT,
+    DepartmentID INT,
+    Salary DECIMAL(10,2),
+    JoinDate DATE,
+    FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
+);
+
+INSERT INTO Employees (EmployeeID, FirstName, LastName, Age, DepartmentID, Salary, JoinDate) VALUES
+(1, 'John', 'Doe', 30, 1, 55000, '2020-01-15'),
+(2, 'Jane', 'Smith', 45, 2, 65000, '2018-07-20'),
+(3, 'Sam', 'Brown', 28, 1, 52000, '2021-04-25'),
+(4, 'Lisa', 'White', 35, 3, 70000, '2019-03-18'),
+(5, 'Mark', 'Black', 50, 1, 75000, '2015-11-05'),
+(6, 'Lucy', 'Green', 40, 2, 60000, '2017-10-10');
+
+-- Görev 1:
+-- Belirli Kolonları Seçme:
+-- Çalışanların sadece FirstName, LastName ve Salary bilgilerini getiren bir SQL sorgusu yazınız.
+---
+
+SELECT FirstName, LastName, Salary FROM Employees;
+
+---
+
+-- Employee tablosundaki belirtilen üç kolonu döndürmektedir 
+-- SELECT FirstName, LastName, Salary
+-- FirstName → Çalışanın adı
+-- LastName → Çalışanın soyadı
+-- Salary → Çalışanın maaşı
+-- FROM Employees;
+-- Bu ifade, veriyi Employees (çalışanlar) tablosundan çeker.
+
+-- Sorgunun işleyişi;
+-- PostgreSQL veritabanı, Employees tablosuna gider.
+-- Tablodaki tüm satırları okur.
+-- Ancak, yalnızca FirstName, LastName ve Salary sütunlarını alır.
+-- Sonuçları ekrana veya istemciye geri döndürür.
+
+
+-- Görev 2:
+-- DISTINCT Komutu ile Tekrarları Önleme
+-- Çalışanların çalıştıkları departmanları benzersiz olarak listeleyen bir SQL sorgusu yazınız.
+---
+
+SELECT DISTINCT d.DepartmentName  
+FROM employees e  
+JOIN departments d ON e.DepartmentID = d.DepartmentID;
+
+---
+
+-- SELECT DISTINCT d.DepartmentName
+-- DISTINCT, tekrar eden satırları kaldırır.
+-- Yukarıdaki geçici tabloda IT, HR ve Finance birden fazla kez geçiyor olabilir.
+-- DISTINCT sayesinde her departman sadece bir kez listelenir.
+-- FROM employees e  
+-- JOIN departments d ON e.DepartmentID = d.DepartmentID;
+-- employees tablosundaki DepartmentID değeri ile departments tablosundaki DepartmentID eşleştirilir.
+-- Böylece her çalışanın bağlı olduğu departmanın adını içeren bir birleşik tablo oluşturulur.
+-- JOIN işlemiyle employees ve departments tabloları birleştirilir.
+-- Çalışanların departman adlarını içeren geçici bir tablo oluşturulur.
+-- SELECT DISTINCT komutu ile tekrar eden departman adları kaldırılır.
+-- Her departman sadece bir kez listelenir.
+
+
+-- Görev 3:
+-- Belirli Bir Departmana Ait Çalışanları Listeleme:
+-- Sadece IT departmanında çalışanların bilgilerini getiren bir SQL sorgusu yazınız.
+---
+
+SELECT e.EmployeeID, e.FirstName, e.LastName, e.Age, e.Salary, e.JoinDate  
+FROM employees e  
+JOIN departments d ON e.DepartmentID = d.DepartmentID  
+WHERE d.DepartmentName = 'IT';
+
+---
+
+-- Bu aşamada, IT departmanında çalışan kişilerin bilgileri döndürülür
+-- SELECT e.EmployeeID, e.FirstName, e.LastName, e.Age, e.Salary, e.JoinDate  
+-- e.EmployeeID → Çalışanın kimlik numarası.
+-- e.FirstName → Çalışanın adı.
+-- e.LastName → Çalışanın soyadı.
+-- e.Age → Çalışanın yaşı.
+-- e.Salary → Çalışanın maaşı.
+-- e.JoinDate → Çalışanın işe başlama tarihi.
+-- Bu aşamada çalışanların hangi departmana ait olduğu bilgisiyle birleştirilmiş bir tablo oluşturulur
+-- FROM employees e  
+-- JOIN departments d ON e.DepartmentID = d.DepartmentID  
+-- employees e → Çalışanları içeren tabloyu kullanıyoruz.
+-- departments d → Departmanları içeren tabloyu kullanıyoruz.
+-- JOIN → İki tabloyu DepartmentID sütunu üzerinden birleştiriyoruz.
+-- ON e.DepartmentID = d.DepartmentID → Çalışanların DepartmentID değeri, departmanlar tablosundaki DepartmentID ile eşleştirilir.
+-- d.DepartmentName = 'IT' → Sadece "IT" departmanına ait çalışanları seçiyoruz.
+-- WHERE → Filtreleme işlemi yaparak, IT departmanı dışında kalan çalışanları listeden çıkarıyoruz.
+
+-- Sorgunun işleyişi;
+-- employees ve departments tabloları DepartmentID üzerinden birleştirildi.
+-- IT departmanı filtresi uygulandı.
+-- Seçilen kolonlar (EmployeeID, FirstName, LastName, Age, Salary, JoinDate) sonucu döndürdü.
+
+
+-- Görev 4:
+-- Maaşa Göre Sıralama:
+-- Çalışanları maaşlarına göre büyükten küçüğe sıralayan bir SQL sorgusu yazınız.
+---
+
+SELECT e.EmployeeID, e.FirstName, e.LastName, e.Age, e.Salary, e.JoinDate
+FROM employees e
+ORDER BY e.Salary DESC;
+
+---
+
+-- Bu ifade, employees tablosundan aşağıdaki kolonları seçer:
+-- e.EmployeeID → Çalışanın kimlik numarası.
+-- e.FirstName → Çalışanın adı.
+-- e.LastName → Çalışanın soyadı.
+-- e.Age → Çalışanın yaşı.
+-- e.Salary → Çalışanın maaşı.
+-- e.JoinDate → Çalışanın işe giriş tarihi.
+-- FROM employees e
+-- employees e → Çalışanları içeren tabloyu kullanıyoruz.
+-- e → employees tablosuna kısa bir takma ad (alias) verdik. Böylece sorguyu daha okunaklı yazabiliyoruz.
+-- ORDER BY e.Salary DESC;
+-- ORDER BY e.Salary → Verileri Salary (maaş) kolonuna göre sıralıyoruz.
+-- DESC → Büyükten küçüğe (azalan sıralama) sıralar.
+-- En yüksek maaşlı çalışan en üstte olur.
+-- En düşük maaşlı çalışan en altta olur.
+
+-- Sorgunun işleyiyişi;
+-- employees tablosundan tüm satırlar çekilir.
+-- Seçili kolonlar (EmployeeID, FirstName, LastName, Age, Salary, JoinDate) belirlenir.
+-- ORDER BY Salary DESC ile maaşlara göre büyükten küçüğe sıralama yapılır.
+-- Sonuçlar döndürülür.
+
+
+-- Görev 5:
+-- Kolonları Birleştirme (Concatenation):
+-- Çalışanların FirstName ve LastName alanlarını birleştirerek, tam adlarını içeren yeni bir kolon oluşturan bir SQL sorgusu yazınız.
+---
+
+ALTER TABLE employees ADD COLUMN FullName TEXT;
+UPDATE employees 
+SET FullName = FirstName || ' ' || LastName
+
+
+---
+
+-- ALTER TABLE employees ADD COLUMN FullName TEXT;
+-- Bu komutun yaptığı işlemler:
+-- ALTER TABLE employees → employees tablosunda bir değişiklik yapacağımızı belirtiyor.
+-- ADD COLUMN FullName TEXT → FullName adında yeni bir TEXT veri tipinde kolon ekliyor.
+-- Başlangıçta FullName kolonu tüm satırlar için NULL olacak. Çünkü bu kolona henüz bir veri eklenmedi.
+-- UPDATE employees 
+-- SET FullName = FirstName || ' ' || LastName;
+-- UPDATE employees → employees tablosundaki verileri güncelleyeceğiz.
+-- SET FullName = FirstName || ' ' || LastName
+-- || operatörü PostgreSQL'de string birleştirme (concatenation) işlemi yapar.
+-- FirstName || ' ' || LastName → FirstName ve LastName arasına bir boşluk ekleyerek birleştirir.
+-- Sonuç olarak FullName kolonu "Ali Yılmaz" ve "Ayşe Demir" gibi değerlerle doldurulur.
+
+-- Sorgunun işleyişi;
+-- ALTER TABLE ile FullName kolonunu ekledik (başlangıçta NULL olarak kaldı).
+--UPDATE ile tüm satırları güncelleyerek, FirstName ve LastName birleşimiyle FullName kolonunu doldurduk.
+
