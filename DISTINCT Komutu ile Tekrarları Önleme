@@ -1,0 +1,22 @@
+-- DISTINCT Komutu ile Tekrarları Önleme:
+-- Çalışanların çalıştıkları departmanları benzersiz olarak listeleyen bir SQL sorgusu yazınız.
+---
+
+SELECT DISTINCT d.DepartmentName  
+FROM employees e  
+JOIN departments d ON e.DepartmentID = d.DepartmentID;
+
+---
+
+-- SELECT DISTINCT d.DepartmentName
+-- DISTINCT, tekrar eden satırları kaldırır.
+-- Yukarıdaki geçici tabloda IT, HR ve Finance birden fazla kez geçiyor olabilir.
+-- DISTINCT sayesinde her departman sadece bir kez listelenir.
+-- FROM employees e  
+-- JOIN departments d ON e.DepartmentID = d.DepartmentID;
+-- employees tablosundaki DepartmentID değeri ile departments tablosundaki DepartmentID eşleştirilir.
+-- Böylece her çalışanın bağlı olduğu departmanın adını içeren bir birleşik tablo oluşturulur.
+-- JOIN işlemiyle employees ve departments tabloları birleştirilir.
+-- Çalışanların departman adlarını içeren geçici bir tablo oluşturulur.
+-- SELECT DISTINCT komutu ile tekrar eden departman adları kaldırılır.
+-- Her departman sadece bir kez listelenir.
