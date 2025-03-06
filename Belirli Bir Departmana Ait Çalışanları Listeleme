@@ -1,0 +1,33 @@
+-- Belirli Bir Departmana Ait Çalışanları Listeleme:
+-- Sadece IT departmanında çalışanların bilgilerini getiren bir SQL sorgusu yazınız.
+---
+
+SELECT e.EmployeeID, e.FirstName, e.LastName, e.Age, e.Salary, e.JoinDate  
+FROM employees e  
+JOIN departments d ON e.DepartmentID = d.DepartmentID  
+WHERE d.DepartmentName = 'IT';
+
+---
+
+-- Bu aşamada, IT departmanında çalışan kişilerin bilgileri döndürülür
+-- SELECT e.EmployeeID, e.FirstName, e.LastName, e.Age, e.Salary, e.JoinDate  
+-- e.EmployeeID → Çalışanın kimlik numarası.
+-- e.FirstName → Çalışanın adı.
+-- e.LastName → Çalışanın soyadı.
+-- e.Age → Çalışanın yaşı.
+-- e.Salary → Çalışanın maaşı.
+-- e.JoinDate → Çalışanın işe başlama tarihi.
+-- Bu aşamada çalışanların hangi departmana ait olduğu bilgisiyle birleştirilmiş bir tablo oluşturulur
+-- FROM employees e  
+-- JOIN departments d ON e.DepartmentID = d.DepartmentID  
+-- employees e → Çalışanları içeren tabloyu kullanıyoruz.
+-- departments d → Departmanları içeren tabloyu kullanıyoruz.
+-- JOIN → İki tabloyu DepartmentID sütunu üzerinden birleştiriyoruz.
+-- ON e.DepartmentID = d.DepartmentID → Çalışanların DepartmentID değeri, departmanlar tablosundaki DepartmentID ile eşleştirilir.
+-- d.DepartmentName = 'IT' → Sadece "IT" departmanına ait çalışanları seçiyoruz.
+-- WHERE → Filtreleme işlemi yaparak, IT departmanı dışında kalan çalışanları listeden çıkarıyoruz.
+
+-- Sorgunun işleyişi;
+-- employees ve departments tabloları DepartmentID üzerinden birleştirildi.
+-- IT departmanı filtresi uygulandı.
+-- Seçilen kolonlar (EmployeeID, FirstName, LastName, Age, Salary, JoinDate) sonucu döndürdü.

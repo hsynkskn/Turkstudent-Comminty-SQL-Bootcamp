@@ -1,0 +1,31 @@
+-- Maaşa Göre Sıralama:
+-- Çalışanları maaşlarına göre büyükten küçüğe sıralayan bir SQL sorgusu yazınız.
+---
+
+SELECT e.EmployeeID, e.FirstName, e.LastName, e.Age, e.Salary, e.JoinDate
+FROM employees e
+ORDER BY e.Salary DESC;
+
+---
+
+-- Bu ifade, employees tablosundan aşağıdaki kolonları seçer:
+-- e.EmployeeID → Çalışanın kimlik numarası.
+-- e.FirstName → Çalışanın adı.
+-- e.LastName → Çalışanın soyadı.
+-- e.Age → Çalışanın yaşı.
+-- e.Salary → Çalışanın maaşı.
+-- e.JoinDate → Çalışanın işe giriş tarihi.
+-- FROM employees e
+-- employees e → Çalışanları içeren tabloyu kullanıyoruz.
+-- e → employees tablosuna kısa bir takma ad (alias) verdik. Böylece sorguyu daha okunaklı yazabiliyoruz.
+-- ORDER BY e.Salary DESC;
+-- ORDER BY e.Salary → Verileri Salary (maaş) kolonuna göre sıralıyoruz.
+-- DESC → Büyükten küçüğe (azalan sıralama) sıralar.
+-- En yüksek maaşlı çalışan en üstte olur.
+-- En düşük maaşlı çalışan en altta olur.
+
+-- Sorgunun işleyiyişi;
+-- employees tablosundan tüm satırlar çekilir.
+-- Seçili kolonlar (EmployeeID, FirstName, LastName, Age, Salary, JoinDate) belirlenir.
+-- ORDER BY Salary DESC ile maaşlara göre büyükten küçüğe sıralama yapılır.
+-- Sonuçlar döndürülür.

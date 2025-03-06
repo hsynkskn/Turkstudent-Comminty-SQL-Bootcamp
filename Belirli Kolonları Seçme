@@ -1,0 +1,21 @@
+-- Belirli Kolonları Seçme:
+-- Çalışanların sadece FirstName, LastName ve Salary bilgilerini getiren bir SQL sorgusu yazınız.
+---
+
+SELECT FirstName, LastName, Salary FROM Employees;
+
+---
+
+-- Employee tablosundaki belirtilen üç kolonu döndürmektedir 
+-- SELECT FirstName, LastName, Salary
+-- FirstName → Çalışanın adı
+-- LastName → Çalışanın soyadı
+-- Salary → Çalışanın maaşı
+-- FROM Employees;
+-- Bu ifade, veriyi Employees (çalışanlar) tablosundan çeker.
+
+-- Sorgunun işleyişi;
+-- PostgreSQL veritabanı, Employees tablosuna gider.
+-- Tablodaki tüm satırları okur.
+-- Ancak, yalnızca FirstName, LastName ve Salary sütunlarını alır.
+-- Sonuçları ekrana veya istemciye geri döndürür.

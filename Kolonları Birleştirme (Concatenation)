@@ -1,0 +1,29 @@
+-- Kolonları Birleştirme (Concatenation):
+-- Çalışanların FirstName ve LastName alanlarını birleştirerek, tam adlarını içeren yeni bir kolon oluşturan bir SQL sorgusu yazınız.
+---
+
+ALTER TABLE employees ADD COLUMN FullName TEXT;
+UPDATE employees 
+SET FullName = FirstName || ' ' || LastName
+
+
+---
+
+-- ALTER TABLE employees ADD COLUMN FullName TEXT;
+-- Bu komutun yaptığı işlemler:
+-- ALTER TABLE employees → employees tablosunda bir değişiklik yapacağımızı belirtiyor.
+-- ADD COLUMN FullName TEXT → FullName adında yeni bir TEXT veri tipinde kolon ekliyor.
+-- Başlangıçta FullName kolonu tüm satırlar için NULL olacak. Çünkü bu kolona henüz bir veri eklenmedi.
+-- UPDATE employees 
+-- SET FullName = FirstName || ' ' || LastName;
+-- UPDATE employees → employees tablosundaki verileri güncelleyeceğiz.
+-- SET FullName = FirstName || ' ' || LastName
+-- || operatörü PostgreSQL'de string birleştirme (concatenation) işlemi yapar.
+-- FirstName || ' ' || LastName → FirstName ve LastName arasına bir boşluk ekleyerek birleştirir.
+-- Sonuç olarak FullName kolonu "Ali Yılmaz" ve "Ayşe Demir" gibi değerlerle doldurulur.
+
+-- Sorgunun işleyişi;
+-- ALTER TABLE ile FullName kolonunu ekledik (başlangıçta NULL olarak kaldı).
+--UPDATE ile tüm satırları güncelleyerek, FirstName ve LastName birleşimiyle FullName kolonunu doldurduk.
+
+
